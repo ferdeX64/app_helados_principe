@@ -97,7 +97,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           ),
                           SizedBox(height: 25),
                           Text(
-                            'Weight:',
+                            'Peso:',
                             style: TextStyle(
                               fontSize: 14.0,
                               color: white,
@@ -125,7 +125,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       transform: Matrix4.rotationY(math.pi),
                       child: Image.asset(
                         widget.food.image,
-                        height: 360.0,
+                        height: 300.0,
                       ),
                     ),
                   )
@@ -139,7 +139,7 @@ class _DetailsPageState extends State<DetailsPage> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'Detail',
+                    'Ingredientes',
                     style: TextStyle(
                       fontSize: 20.0,
                       color: black,
@@ -163,7 +163,7 @@ class _DetailsPageState extends State<DetailsPage> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            'Total Price',
+                            'Precio por Unidad',
                             style: TextStyle(
                               fontSize: 16.0,
                               color: black,
@@ -172,7 +172,25 @@ class _DetailsPageState extends State<DetailsPage> {
                           ),
                           SizedBox(height: 5.0),
                           Text(
-                            widget.food.price,
+                            widget.food.priceperunit,
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: black,
+                              fontWeight: FontWeight.w800,
+                            ),
+                          ),
+                          SizedBox(height: 10.0),
+                          Text(
+                            'Precio por Docena',
+                            style: TextStyle(
+                              fontSize: 16.0,
+                              color: black,
+                              fontWeight: FontWeight.w400,
+                            ),
+                          ),
+                          SizedBox(height: 5.0),
+                          Text(
+                            widget.food.priceperdozen,
                             style: TextStyle(
                               fontSize: 16.0,
                               color: black,
@@ -227,7 +245,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           child: Row(
                             children: [
                               Text(
-                                'Add to Cart',
+                                'Añadir ',
                                 style: TextStyle(
                                   fontSize: 16.0,
                                   color: white,
