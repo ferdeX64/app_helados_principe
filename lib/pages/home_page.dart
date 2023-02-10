@@ -1,9 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:ui10/core/color.dart';
 import 'package:ui10/core/data.dart';
-import 'package:ui10/details_page.dart';
-import 'package:ui10/widget/custom_app_bar.dart';
+import 'package:ui10/pages/details_page.dart';
+import 'package:ui10/pages/signin_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -18,6 +19,33 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: white,
+      drawer: Drawer(
+        child: Container(
+          color: Colors.white,
+          child: Column(
+            children: [
+              Container(
+                width: 100,
+                height: 100,
+                margin: const EdgeInsets.all(50),
+                child: Image.asset("assets/image/man.png"),
+              ),
+              ListTile(
+                onTap: () {
+                  FirebaseAuth.instance.signOut().then((value) {
+                    print("cerrar sesión");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) => SignInPage()));
+                  });
+                },
+                leading: const Icon(Icons.logout),
+                title: const Text("Cerrar Sesión"),
+              )
+            ],
+          ),
+        ),
+      ),
+      appBar: AppBar(backgroundColor: Color(0xFFCB2B93)),
       body: SafeArea(
         child: Column(
           children: [
@@ -26,15 +54,15 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  CustomAppBar(
-                    btnIcon1: 'menu.png',
-                    btnFun1: () {},
-                    btnIcon2: 'search.png',
-                    btnFun2: () {},
-                  ),
+                  // CustomAppBar(
+                  //   btnIcon1: 'menu.png',
+                  //   btnFun1: () {},
+                  //   btnIcon2: 'search.png',
+                  //   btnFun2: () {},
+                  // ),
                   SizedBox(height: 20.0),
                   Text(
-                    'Hi Hira',
+                    'Hola!',
                     style: TextStyle(
                       fontSize: 30.0,
                       fontWeight: FontWeight.bold,
@@ -42,7 +70,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height: 5.0),
                   Text(
-                    'Want to order delicious food?',
+                    '¿Quieres ordenar deliciosos helados?',
                     style: TextStyle(
                       fontSize: 18.0,
                       fontWeight: FontWeight.w300,
@@ -53,14 +81,14 @@ class _HomePageState extends State<HomePage> {
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        'Categories',
+                        'Categorias',
                         style: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                       Text(
-                        'See All',
+                        'ver más',
                         style: TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.w300,
@@ -120,7 +148,7 @@ class _HomePageState extends State<HomePage> {
                   ),
                   SizedBox(height: 30.0),
                   Text(
-                    'Fine Dinning food',
+                    'Variedad en Sabores',
                     style: TextStyle(
                       fontSize: 20.0,
                       fontWeight: FontWeight.bold,
@@ -176,7 +204,7 @@ class _HomePageState extends State<HomePage> {
                                   ),
                                   SizedBox(height: 10.0),
                                   Text(
-                                    food.price,
+                                    food.priceperunit,
                                     style: TextStyle(
                                       fontSize: 16.0,
                                       color: index % 2 == 0 ? white : black,

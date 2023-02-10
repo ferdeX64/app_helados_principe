@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "70619039502",
+    "project_id": "backend-app-helados",
+    "storage_bucket": "backend-app-helados.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:70619039502:android:fcab44fd7d50d3f949395f",
+        "android_client_info": {
+          "package_name": "com.example.ui10"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "70619039502-i22sh3iu6j3369dhmn2gq9hrh7ar6vv7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCBeCMQdhEdZAAvVanAhnssSRs_0IhBs58"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "70619039502-i22sh3iu6j3369dhmn2gq9hrh7ar6vv7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
