@@ -1,5 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:ui10/pages/home_page.dart';
+import 'package:ui10/pages/pedido_page.dart';
 
 import 'package:ui10/pages/signin_page.dart';
 

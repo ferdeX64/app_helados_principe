@@ -179,46 +179,7 @@ class _DetailsPageState extends State<DetailsPage> {
                               fontWeight: FontWeight.w800,
                             ),
                           ),
-                          SizedBox(height: 10.0),
-                          Text(
-                            'Precio por Docena',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              color: black,
-                              fontWeight: FontWeight.w400,
-                            ),
-                          ),
-                          SizedBox(height: 5.0),
-                          Text(
-                            widget.food.priceperdozen,
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              color: black,
-                              fontWeight: FontWeight.w800,
-                            ),
-                          ),
                         ],
-                      ),
-                      Container(
-                        height: 40.0,
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
-                        decoration: BoxDecoration(
-                            color: green,
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(40.0),
-                              bottomRight: Radius.circular(40.0),
-                              topLeft: Radius.circular(40.0),
-                            )),
-                        child: Center(
-                          child: Text(
-                            'Try Promo code',
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              color: white,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                        ),
                       ),
                     ],
                   ),
