@@ -2,8 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:ui10/core/color.dart';
 import 'package:ui10/core/data.dart';
 import 'package:ui10/models/helado_model.dart';
+import 'package:ui10/pages/pedido_page.dart' as pedido;
 import 'package:ui10/widget/custom_app_bar.dart';
 import 'dart:math' as math;
+
 class DetailsPage extends StatefulWidget {
   final Helado model;
   const DetailsPage({Key? key, required this.model}) : super(key: key);
@@ -24,11 +26,16 @@ class _DetailsPageState extends State<DetailsPage> {
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: CustomAppBar(
                 btnIcon1: 'arrow.png',
-                btnIcon2: 'more.png',
+                btnIcon2: 'carrito.png',
                 btnFun1: () {
                   Navigator.pop(context);
                 },
-                btnFun2: () {},
+                btnFun2: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => pedido.PedidoPage()));
+                },
               ),
             ),
             Padding(
@@ -43,7 +50,6 @@ class _DetailsPageState extends State<DetailsPage> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  
                 ]),
               ),
             ),

@@ -5,8 +5,8 @@ import 'package:ui10/core/color.dart';
 import 'package:ui10/core/data.dart';
 import 'package:ui10/pages/details_page.dart';
 import 'package:ui10/pages/ice_cream_page.dart';
+import 'package:ui10/pages/pedido_page.dart';
 import 'package:ui10/pages/signin_page.dart';
-
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -17,6 +17,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   int selectIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,6 +35,14 @@ class _HomePageState extends State<HomePage> {
               ),
               ListTile(
                 onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => PedidoPage()));
+                },
+                leading: const Icon(Icons.shopping_cart),
+                title: const Text("Carrito"),
+              ),
+              ListTile(
+                onTap: () {
                   FirebaseAuth.instance.signOut().then((value) {
                     print("cerrar sesión");
                     Navigator.push(context,
@@ -42,21 +51,22 @@ class _HomePageState extends State<HomePage> {
                 },
                 leading: const Icon(Icons.logout),
                 title: const Text("Cerrar Sesión"),
-              )
+              ),
             ],
           ),
         ),
       ),
       appBar: AppBar(
-        title:  Center( 
-        child:Padding(
-          padding: const EdgeInsets.only(right: 50),
-          child: Text("Helados del principe"),
-        ),) ,
-        backgroundColor: Color(0xFFCB2B93)),
+          title: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(right: 50),
+              child: Text("Helados del principe"),
+            ),
+          ),
+          backgroundColor: Color(0xFFCB2B93)),
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height -40,
+          height: MediaQuery.of(context).size.height - 40,
           child: SafeArea(
             child: Column(
               children: [
@@ -128,7 +138,8 @@ class _HomePageState extends State<HomePage> {
                                     context,
                                     MaterialPageRoute<void>(
                                       builder: (BuildContext context) =>
-                                          IceCreamPage(categories:categories[index]                                          ),
+                                          IceCreamPage(
+                                              categories: categories[index]),
                                     ),
                                   );
                                 },
@@ -248,7 +259,6 @@ class _HomePageState extends State<HomePage> {
                         );
                       }),
                 ),
-                
               ],
             ),
           ),

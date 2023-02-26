@@ -24,7 +24,7 @@ class _DetailsPageState extends State<DetailsPage> {
               padding: EdgeInsets.symmetric(horizontal: 20.0),
               child: CustomAppBar(
                 btnIcon1: 'arrow.png',
-                btnIcon2: 'more.png',
+                btnIcon2: 'carrito.png',
                 btnFun1: () {
                   Navigator.pop(context);
                 },
