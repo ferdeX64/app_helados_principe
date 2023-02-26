@@ -1,9 +1,16 @@
+import 'package:cart_stepper/cart_stepper.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:ui10/core/color.dart';
-import 'package:ui10/core/data.dart';
 import 'package:ui10/models/helado_model.dart';
 import 'package:ui10/widget/custom_app_bar.dart';
 import 'dart:math' as math;
+
+var now = new DateTime.now();
+var formatter = new DateFormat('yyyy-MM-dd');
+String nombre = "Pedido " + formatter.format(now);
+
 class DetailsPage extends StatefulWidget {
   final Helado model;
   const DetailsPage({Key? key, required this.model}) : super(key: key);
@@ -13,6 +20,9 @@ class DetailsPage extends StatefulWidget {
 }
 
 class _DetailsPageState extends State<DetailsPage> {
+  TextEditingController heladoController = TextEditingController(text: "");
+  int _counterInit = 1;
+  bool click=true;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,7 +53,6 @@ class _DetailsPageState extends State<DetailsPage> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  
                 ]),
               ),
             ),
@@ -192,26 +201,34 @@ class _DetailsPageState extends State<DetailsPage> {
                           ),
                         ],
                       ),
-                      Container(
-                        height: 40.0,
-                        padding: EdgeInsets.symmetric(horizontal: 20.0),
-                        decoration: BoxDecoration(
-                            color: green,
-                            borderRadius: BorderRadius.only(
-                              bottomLeft: Radius.circular(40.0),
-                              bottomRight: Radius.circular(40.0),
-                              topLeft: Radius.circular(40.0),
-                            )),
-                        child: Center(
-                          child: Text(
-                            'Try Promo code',
-                            style: TextStyle(
-                              fontSize: 15.0,
-                              color: white,
-                              fontWeight: FontWeight.w500,
+                      Column(
+                        children: [
+                          Container(
+                            height: 50.0,
+                            padding: EdgeInsets.symmetric(horizontal: 1.0),
+                            decoration: BoxDecoration(
+                                color: green,
+                                borderRadius: BorderRadius.only(
+                                  bottomLeft: Radius.circular(40.0),
+                                  bottomRight: Radius.circular(40.0),
+                                  topLeft: Radius.circular(40.0),
+                                )),
+                            child: Center(
+                              child: CartStepperInt(
+                                style: CartStepperStyle.fromColorScheme(
+                                    ColorScheme.light(primary: green),
+                                    textStyle: TextStyle(color: Colors.white)),
+                                elevation: 7,
+                                value: _counterInit,
+                                didChangeCount: (count) {
+                                  setState(() {
+                                    _counterInit = count;
+                                  });
+                                },
+                              ),
                             ),
                           ),
-                        ),
+                        ],
                       ),
                     ],
                   ),
@@ -227,34 +244,44 @@ class _DetailsPageState extends State<DetailsPage> {
                           size: 30.0,
                         ),
                       ),
-                      Container(
-                        height: 40.0,
-                        padding: EdgeInsets.symmetric(horizontal: 30.0),
-                        decoration: BoxDecoration(
-                          color: brown,
-                          borderRadius: BorderRadius.circular(40.0),
-                        ),
-                        child: Center(
-                          child: Row(
-                            children: [
-                              Text(
-                                'Añadir ',
-                                style: TextStyle(
-                                  fontSize: 16.0,
-                                  color: white,
-                                  fontWeight: FontWeight.w500,
-                                ),
+                      InkWell(
+                          child: Container(
+                            height: 40.0,
+                            padding: EdgeInsets.symmetric(horizontal: 30.0),
+                            decoration: BoxDecoration(
+                              color: click? brown:Colors.green,
+                              borderRadius: BorderRadius.circular(40.0),
+                            ),
+                            child: Center(
+                              child: Row(
+                                children: [
+                                  Text(click?
+                                    'Añadir ':'Comprado',
+                                    style: TextStyle(
+                                      fontSize: 16.0,
+                                      color: white,
+                                      fontWeight: FontWeight.w500,
+                                    ),
+                                  ),
+                                  SizedBox(width: 10.0),
+                                  Icon(
+                                    Icons.shopping_cart_outlined,
+                                    color: white,
+                                    size: 20.0,
+                                  ),
+                                ],
                               ),
-                              SizedBox(width: 10.0),
-                              Icon(
-                                Icons.shopping_cart_outlined,
-                                color: white,
-                                size: 20.0,
-                              )
-                            ],
+                            ),
                           ),
-                        ),
-                      ),
+                          onTap: (){                          
+                            setState(() {
+                              click=!click;
+                            
+                            });
+                            if(click==false){
+                                sendHeladoToList(widget.model.heladoName, _counterInit);
+                            }
+                          }),
                     ],
                   ),
                 ],
@@ -266,4 +293,36 @@ class _DetailsPageState extends State<DetailsPage> {
       ),
     );
   }
+}
+
+sendHeladoToList( String heladoName, int cantidad) async {
+  List pedido = [];
+  QuerySnapshot querySnapshot = await FirebaseFirestore.instance
+      .collection('Pedido')
+      .where("nombre_pedido", isEqualTo: nombre)
+      .get();
+  for (var doc in querySnapshot.docs) {
+    pedido.add(doc.data());
+  }
+  if (pedido.isEmpty) {
+    createPedido(nombre);
+    createHeladoToList(heladoName, cantidad);
+    
+  } else {
+    createHeladoToList(heladoName, cantidad);
+  }
+
+}
+createHeladoToList(String heladoName, int cantidad)async{
+  await FirebaseFirestore.instance.collection('Lista_helados').add({
+      "helado_name": heladoName,
+      "cantidad": cantidad,
+      "nombre_lista": nombre
+    });
+}
+
+createPedido(String nombreLista) async {
+  await FirebaseFirestore.instance.collection('Pedido').add({
+    "nombre_pedido": nombre,
+  });
 }

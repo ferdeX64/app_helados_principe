@@ -32,6 +32,8 @@ dependencies:
   firebase_core_platform_interface: 4.5.1
   firebase_messaging: ^13.0.4
   cloud_firestore: ^3.5.1
+  cart_stepper: ^4.1.0
+  intl: ^0.17.0
 
 dev_dependencies:
   flutter_test:
