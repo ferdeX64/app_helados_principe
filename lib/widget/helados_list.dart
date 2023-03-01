@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:ui10/models/lista_model.dart';
+import 'package:ui10/models/pedido_model.dart';
 
 import 'package:ui10/pages/ice_cream_details_page.dart';
 import 'package:ui10/widget/lista_card.dart';
@@ -8,20 +9,21 @@ import 'package:ui10/widget/lista_card.dart';
 
 
 class HeladosList extends StatefulWidget {
- HeladosList({Key? key, required nombre}) : super(key: key);
- 
+ HeladosList({Key? key, required this.modelo}) : super(key: key);
+ final Pedido modelo;
   @override
   State<HeladosList> createState() => _HeladosListState();
 }
 
 class _HeladosListState extends State<HeladosList> {
   
-  final Stream<QuerySnapshot> heladosStream =
-      FirebaseFirestore.instance.collection('Lista_helados').where("nombre_lista",isEqualTo: nombre ).snapshots();
+  
 
   @override
   Widget build(BuildContext context) {
-   print(nombre);
+    final Stream<QuerySnapshot> heladosStream =
+      FirebaseFirestore.instance.collection('Lista_helados').where("nombre_lista",isEqualTo: widget.modelo.nombrePedido ).snapshots();
+
     return StreamBuilder<QuerySnapshot>(
       stream: heladosStream,
       builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
@@ -43,7 +45,7 @@ class _HeladosListState extends State<HeladosList> {
           child: ListView(
             
               children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                 print(heladosStream);
+                
                 
                 ListaHelado model =
                     ListaHelado.fromJson(document.data() as Map<String, dynamic>);

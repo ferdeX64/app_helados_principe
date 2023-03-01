@@ -172,7 +172,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           ),
                           SizedBox(height: 5.0),
                           Text(
-                            widget.model.heladoPrice.toString(),
+                            "0.50\$",
                             style: TextStyle(
                               fontSize: 16.0,
                               color: black,
@@ -190,9 +190,9 @@ class _DetailsPageState extends State<DetailsPage> {
                           ),
                           SizedBox(height: 5.0),
                           Text(
-                            "5",
+                            "6\$",
                             style: TextStyle(
-                              fontSize: 16.0,
+                              fontSize: 20.0,
                               color: black,
                               fontWeight: FontWeight.w800,
                             ),
@@ -277,7 +277,7 @@ class _DetailsPageState extends State<DetailsPage> {
                             
                             });
                             if(click==false){
-                                sendHeladoToList(widget.model.heladoName, _counterInit);
+                                sendHeladoToList(widget.model.heladoName, _counterInit, widget.model.heladoImage);
                             }
                           }),
                     ],
@@ -293,7 +293,7 @@ class _DetailsPageState extends State<DetailsPage> {
   }
 }
 
-sendHeladoToList( String heladoName, int cantidad) async {
+sendHeladoToList( String heladoName, int cantidad, String heladoImage) async {
   List pedido = [];
   QuerySnapshot querySnapshot = await FirebaseFirestore.instance
       .collection('Pedido')
@@ -304,23 +304,25 @@ sendHeladoToList( String heladoName, int cantidad) async {
   }
   if (pedido.isEmpty) {
     createPedido(nombre);
-    createHeladoToList(heladoName, cantidad);
+    createHeladoToList(heladoName, cantidad,heladoImage);
     
   } else {
-    createHeladoToList(heladoName, cantidad);
+    createHeladoToList(heladoName, cantidad,heladoImage);
   }
 
 }
-createHeladoToList(String heladoName, int cantidad)async{
+createHeladoToList(String heladoName, int cantidad, String heladoImage)async{
   await FirebaseFirestore.instance.collection('Lista_helados').add({
       "helado_name": heladoName,
       "cantidad": cantidad,
-      "nombre_lista": nombre
+      "nombre_lista": nombre,
+      "helado_image": heladoImage
     });
 }
 
-createPedido(String nombreLista) async {
+createPedido(String nombreLista, ) async {
   await FirebaseFirestore.instance.collection('Pedido').add({
     "nombre_pedido": nombre,
+    
   });
 }

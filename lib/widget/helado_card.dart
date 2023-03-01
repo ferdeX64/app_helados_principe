@@ -46,7 +46,7 @@ class HeladoCard extends StatelessWidget {
                 child: Text(
                   model.heladoName,
                   style: TextStyle(
-                      fontSize: 15,
+                      fontSize: 11,
                       fontFamily: 'Yanone',
                       color: Colors.black,
                       fontWeight: FontWeight.w600,

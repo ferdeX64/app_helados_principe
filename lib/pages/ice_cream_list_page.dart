@@ -11,7 +11,7 @@ class IceCreamListPage extends StatelessWidget {
   final Pedido model;
   @override
   Widget build(BuildContext context) {
-    print(nombre);
+  
     return Scaffold(
       backgroundColor: white,
       drawer: Drawer(
@@ -52,7 +52,7 @@ class IceCreamListPage extends StatelessWidget {
           child: SafeArea(
             child: Container(
                   height: MediaQuery.of(context).size.height,
-                  child: HeladosList(nombre:model.nombrePedido),
+                  child: HeladosList(modelo:model),
                 ),
           ),
         ),

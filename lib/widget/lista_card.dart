@@ -9,7 +9,7 @@ class ListaCard extends StatelessWidget {
     return Card(
         child: ListTile(
         
-        leading: SizedBox.square(dimension: 65, child: Image(image: AssetImage("assets/image/Pedido.jpg"))),
+        leading: SizedBox.square(dimension: 65, child: Image(image: NetworkImage(model.heladoImage, scale: 0.1))),
         title: Text(model.heladoName),
         subtitle: Text("Cantidad: "+model.cantidad.toString()),
         

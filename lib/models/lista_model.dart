@@ -25,7 +25,7 @@ class ListaHelado {
         cantidad: json["cantidad"],
         heladoName: json["helado_name"],
         nombreLista: json["nombre_lista"],
-        heladoImage: json["helado_image"] ==null ?"kkss":"kaskd",
+        heladoImage: json["helado_image"],
     );
 
     Map<String, dynamic> toJson() => {

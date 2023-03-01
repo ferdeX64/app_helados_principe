@@ -32,16 +32,18 @@ class _AllIceCreamState extends State<AllIceCream> {
           );
         }
         return Container(
-          margin: EdgeInsets.all(12),
-          child: GridView.count(
-              crossAxisCount: 3,
-              crossAxisSpacing: 5,
-              children: snapshot.data!.docs.map((DocumentSnapshot document) {
-                Helado model =
-                    Helado.fromJson(document.data() as Map<String, dynamic>);
-                return HeladoCard(model: model);
-              }).toList()),
-        );
+            margin: EdgeInsets.all(12),
+            child: GridView.count(
+              physics: ScrollPhysics(),
+                crossAxisCount: 3,
+                crossAxisSpacing: 5,
+                children: snapshot.data!.docs.map((DocumentSnapshot document) {
+                  Helado model =
+                      Helado.fromJson(document.data() as Map<String, dynamic>);
+                  return HeladoCard(model: model);
+                }).toList()),
+          );
+        
       },
     );
   }

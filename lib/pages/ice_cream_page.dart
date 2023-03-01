@@ -45,12 +45,14 @@ class IceCreamPage extends StatelessWidget {
           padding: const EdgeInsets.only(right: 50),
           child: Text(categories.name),
         ),) ,
-        backgroundColor: Color(0xFFCB2B93)),
+        backgroundColor: Color.fromRGBO(203, 43, 147, 1)),
       body: SingleChildScrollView(
         child: Container(
+
+          height: MediaQuery.of(context).size.height-39,
           child: SafeArea(
             child: Container(
-                  height: MediaQuery.of(context).size.height,
+                  
                   child: AllIceCream(),
                 ),
           ),
