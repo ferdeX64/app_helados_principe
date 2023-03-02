@@ -24,6 +24,14 @@ class PedidosPage extends StatelessWidget {
               ),
               ListTile(
                 onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (builder) => PedidosPage()));
+                },
+                leading: const Icon(Icons.shopping_cart_outlined),
+                title: const Text("Carrito"),
+              ),
+              ListTile(
+                onTap: () {
                   FirebaseAuth.instance.signOut().then((value) {
                     print("cerrar sesión");
                     Navigator.push(context,

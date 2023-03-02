@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
         fontFamily: 'Sofia Pro',
       ),
-      home: const PedidosPage(),
+      home: const HomePage(),
     );
   }
 }

@@ -8,13 +8,7 @@ class Categories {
 
 List<Categories> categories = [
   Categories(
-      id: 0, name: 'Helados de Salcedo', image: 'assets/icons/helado1.svg'),
-  Categories(
-      id: 1, name: 'Helados con Cono', image: 'assets/icons/helado2.svg'),
-  Categories(
-      id: 2, name: 'Helados de Paleta', image: 'assets/icons/helado4.svg'),
-  Categories(
-      id: 3, name: 'Helados de Sabores', image: 'assets/icons/helado3.svg'),
+      id: 0, name: 'Helados de Salcedo', image: 'assets/icons/helado3.svg'),
 ];
 
 class Food {

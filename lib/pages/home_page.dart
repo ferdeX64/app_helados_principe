@@ -5,8 +5,8 @@ import 'package:ui10/core/color.dart';
 import 'package:ui10/core/data.dart';
 import 'package:ui10/pages/details_page.dart';
 import 'package:ui10/pages/ice_cream_page.dart';
+import 'package:ui10/pages/pedidos_page.dart';
 import 'package:ui10/pages/signin_page.dart';
-
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -34,6 +34,14 @@ class _HomePageState extends State<HomePage> {
               ),
               ListTile(
                 onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (builder) => PedidosPage()));
+                },
+                leading: const Icon(Icons.shopping_cart_outlined),
+                title: const Text("Carrito"),
+              ),
+              ListTile(
+                onTap: () {
                   FirebaseAuth.instance.signOut().then((value) {
                     print("cerrar sesión");
                     Navigator.push(context,
@@ -42,21 +50,22 @@ class _HomePageState extends State<HomePage> {
                 },
                 leading: const Icon(Icons.logout),
                 title: const Text("Cerrar Sesión"),
-              )
+              ),
             ],
           ),
         ),
       ),
       appBar: AppBar(
-        title:  Center( 
-        child:Padding(
-          padding: const EdgeInsets.only(right: 50),
-          child: Text("Helados del principe"),
-        ),) ,
-        backgroundColor: Color(0xFFCB2B93)),
+          title: Center(
+            child: Padding(
+              padding: const EdgeInsets.only(right: 50),
+              child: Text("Helados del principe"),
+            ),
+          ),
+          backgroundColor: Color(0xFFCB2B93)),
       body: SingleChildScrollView(
         child: Container(
-          height: MediaQuery.of(context).size.height -40,
+          height: MediaQuery.of(context).size.height - 120,
           child: SafeArea(
             child: Column(
               children: [
@@ -97,28 +106,22 @@ class _HomePageState extends State<HomePage> {
                               fontSize: 20.0,
                               fontWeight: FontWeight.bold,
                             ),
-                          ),
-                          Text(
-                            'ver más',
-                            style: TextStyle(
-                              fontSize: 16.0,
-                              fontWeight: FontWeight.w300,
-                            ),
-                          ),
+                          )
+                         
                         ],
                       ),
                       SizedBox(height: 30.0),
                       Container(
-                        height: 250.0,
+                        height: 180.0,
                         child: GridView.builder(
                             physics: BouncingScrollPhysics(),
                             itemCount: categories.length,
                             gridDelegate:
                                 SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 2,
-                              mainAxisSpacing: 2,
-                              childAspectRatio: 1.5,
+                              crossAxisCount: 1,
+                              crossAxisSpacing: 1,
+                              mainAxisSpacing: 1,
+                              childAspectRatio: 1.9,
                             ),
                             itemBuilder: (itemBuilder, index) {
                               return GestureDetector(
@@ -128,12 +131,12 @@ class _HomePageState extends State<HomePage> {
                                     context,
                                     MaterialPageRoute<void>(
                                       builder: (BuildContext context) =>
-                                          IceCreamPage(categories:categories[index]                                          ),
+                                          IceCreamPage(
+                                              categories: categories[index]),
                                     ),
                                   );
                                 },
                                 child: Container(
-                                  height: 50.0,
                                   margin: EdgeInsets.only(
                                       bottom: 10.0, right: 10.0),
                                   decoration: BoxDecoration(
@@ -248,7 +251,6 @@ class _HomePageState extends State<HomePage> {
                         );
                       }),
                 ),
-                
               ],
             ),
           ),
