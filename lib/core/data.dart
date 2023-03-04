@@ -47,7 +47,7 @@ List<Food> foods = [
   Food(
     id: 0,
     name: 'Helado',
-    title: 'Cooked veg with sweet Cookies',
+    title: 'Helado de leche con mora, naranjilla y taxo',
     withs: 'de leche con mora, naranjilla y taxo',
     image: 'assets/image/helado01.png',
     priceperunit: '\$ 0.50',
@@ -60,8 +60,8 @@ List<Food> foods = [
   Food(
     id: 0,
     name: 'Helado',
-    title: 'Duck meat with Citrus glaze',
-    withs: 'De chocolate y menta',
+    title: 'Helado de chocolate y menta',
+    withs: 'de chocolate y menta',
     image: 'assets/image/helado03.png',
     priceperunit: '\$ 0.50',
     priceperdozen: '\$ 6',

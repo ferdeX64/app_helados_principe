@@ -1,3 +1,5 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:ui10/pages/home_page.dart';
@@ -16,7 +18,15 @@ class SignInPage extends StatefulWidget {
 class _SignInPageState extends State<SignInPage> {
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
-  @override
+  User? user;
+  onRefresh(userCred) {
+    if (mounted) {
+      setState(() {
+        user = userCred;
+      });
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,13 +50,13 @@ class _SignInPageState extends State<SignInPage> {
                 const SizedBox(
                   height: 30,
                 ),
-                reusableTextField("Ingrese el correo", Icons.person_outline,
+                reusableTextField("Correo Electrónico", Icons.email_outlined,
                     false, _emailTextController),
                 const SizedBox(
                   height: 20,
                 ),
-                reusableTextField("Ingrese la contraseña", Icons.lock_outline,
-                    true, _passwordTextController),
+                reusableTextField("Contraseña", Icons.lock_outline, true,
+                    _passwordTextController),
                 const SizedBox(
                   height: 5,
                 ),
@@ -59,7 +69,56 @@ class _SignInPageState extends State<SignInPage> {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => HomePage()));
                   }).onError((error, stackTrace) {
-                    print("Error ${error.toString()}");
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text(
+                              "Error al Iniciar Sesión",
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.center,
+                            ),
+                            content: SingleChildScrollView(
+                              child: ListBody(
+                                children: [
+                                  Text(
+                                    "Porfavor revise que su correo electrónico y contraseña sean correctos.",
+                                    textAlign: TextAlign.center,
+                                  )
+                                ],
+                              ),
+                            ),
+                            actions: [
+                              Container(
+                                  child: Align(
+                                alignment: Alignment.bottomCenter,
+                                /* Boton Aceptar */
+                                child: TextButton(
+                                  style: OutlinedButton.styleFrom(
+                                    fixedSize: Size(100, 40),
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(10)),
+                                    backgroundColor: Color(0xFFCB2B93),
+                                  ),
+                                  child: Text(
+                                    "Aceptar",
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 15,
+                                        color: Colors.white),
+                                  ),
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                ),
+                              )),
+                            ],
+                          );
+                        });
                   });
                 }),
                 signUpOption(),

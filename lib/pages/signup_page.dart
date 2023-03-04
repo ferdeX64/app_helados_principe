@@ -16,6 +16,7 @@ class _SignUpPageState extends State<SignUpPage> {
   TextEditingController _passwordTextController = TextEditingController();
   TextEditingController _emailTextController = TextEditingController();
   TextEditingController _userNameTextController = TextEditingController();
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,18 +46,18 @@ class _SignUpPageState extends State<SignUpPage> {
                 const SizedBox(
                   height: 20,
                 ),
-                reusableTextField("Ingrese su nombre", Icons.person_outline,
-                    false, _userNameTextController),
+                reusableTextField("Nombre", Icons.person_outline, false,
+                    _userNameTextController),
                 const SizedBox(
                   height: 20,
                 ),
-                reusableTextField("Ingrese su correo", Icons.person_outline,
+                reusableTextField("Correo Electrónico", Icons.email_outlined,
                     false, _emailTextController),
                 const SizedBox(
                   height: 20,
                 ),
-                reusableTextField("Ingrese la contraseña", Icons.lock_outlined,
-                    true, _passwordTextController),
+                reusableTextField("Contraseña", Icons.lock_outlined, true,
+                    _passwordTextController),
                 const SizedBox(
                   height: 20,
                 ),
@@ -66,11 +67,44 @@ class _SignUpPageState extends State<SignUpPage> {
                           email: _emailTextController.text,
                           password: _passwordTextController.text)
                       .then((value) {
+                    final _snackBar =
+                        SnackBar(content: Text("Nueva cuenta registrada"));
+                    ScaffoldMessenger.of(context).showSnackBar(_snackBar);
+                   
                     print("Created New Account");
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => HomePage()));
                   }).onError((error, stackTrace) {
-                    print("Error ${error.toString()}");
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            title: Text(
+                              "Error al Registrar Usuario",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            content: SingleChildScrollView(
+                              child: ListBody(
+                                children: [
+                                  Text(
+                                    "Ocurrio un problema con el servicio de autenticación, vuelva a intertarlo de nuevo.",
+                                    textAlign: TextAlign.center,
+                                  )
+                                ],
+                              ),
+                            ),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: Text("Aceptar"))
+                            ],
+                          );
+                        });
                   });
                 })
               ],
