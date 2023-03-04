@@ -34,6 +34,7 @@ dependencies:
   cloud_firestore: ^3.5.1
   cart_stepper: ^4.1.0
   intl: ^0.17.0
+  flutter_slidable: ^2.0.0
 
 dev_dependencies:
   flutter_test:

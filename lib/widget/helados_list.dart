@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:ui10/models/lista_model.dart';
 import 'package:ui10/models/pedido_model.dart';
-
-import 'package:ui10/pages/ice_cream_details_page.dart';
 import 'package:ui10/widget/lista_card.dart';
 
 
@@ -50,11 +49,46 @@ class _HeladosListState extends State<HeladosList> {
                 ListaHelado model =
                     ListaHelado.fromJson(document.data() as Map<String, dynamic>);
                    
-                return ListaCard(model: model);
+                return Slidable(
+                  key: const ValueKey(0),
+
+              // The start action pane is the one at the left or the top side.
+              startActionPane: ActionPane(
+                extentRatio: 0.3,
+                // A motion is a widget used to control how the pane animates.
+                motion: const StretchMotion(),
+                 dismissible: DismissiblePane(onDismissed: () {}),
+
+                // A pane can dismiss the Slidable.
                 
-              }).toList()),
+
+                // All actions are defined in the children parameter.
+                children:  [
+                  // A SlidableAction can have an icon and/or a label.
+                  SlidableAction(
+                    onPressed: doNothing,
+                    backgroundColor: Color(0xFFFE4A49),
+                    foregroundColor: Colors.white,
+                    icon: Icons.delete,
+                    label: 'Eliminar',
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                 
+                ],
+              ),
+              
+                  child: ListaCard(model: model));
+                
+              }).toList())
+                
+                
+                
+              
         );
       },
     );
   }
+}
+void doNothing(BuildContext context) {
+  
 }
