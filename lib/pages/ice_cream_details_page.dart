@@ -274,7 +274,7 @@ class _DetailsPageState extends State<DetailsPage> {
                           onTap: (){                          
                             setState(() {
                               click=!click;
-                            
+                            //comentario
                             });
                             if(click==false){
                                 sendHeladoToList(widget.model.heladoName, _counterInit, widget.model.heladoImage);
